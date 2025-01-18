@@ -1,126 +1,54 @@
 package com.cars24.runner;
 
-import com.cars24.config.DbConfig;
-import com.cars24.dao.impl.CustomerDaoImpl;
-import com.cars24.data.req.AddCustomerReq;
-import com.cars24.data.req.CustomerProfileReq;
-import com.cars24.data.res.CustomerProfileRes;
-import com.cars24.services.CustomerService;
-import com.cars24.services.impl.CustomerServiceImpl;
-import com.cars24.util.DbUtil;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Application starts");
+        Scanner sc = new Scanner(System.in);  // Initialize the Scanner
+        boolean exit = true;  // Variable to control the loop
 
-        try {
-            DriverManager.getConnection(DbConfig.host, DbConfig.username, DbConfig.password);
-            System.out.println("Connection successful!");
-        } catch (SQLException e) {
-            System.out.println("Error connecting to the database");
-            throw new RuntimeException(e);
+        while (exit) {
+            // Display menu
+            System.out.println("Enter your choice:");
+            System.out.println("1: Add Customer");
+            System.out.println("2: Get Customer");
+            System.out.println("3: Update Customer");
+            System.out.println("4: Delete");
+            System.out.println("5:exit");
+
+            // Read user input
+            int choice = sc.nextInt();
+
+            // Switch statement for menu options
+            switch (choice) {
+                case 1:
+                    // Call addCustomer() method from UI class
+                    UI.addCustomer();
+                    break;
+                case 2:
+                    // Call getCustomer() method from UI class
+                    UI.getCustomer();
+                    break;
+                case 3:
+
+                    UI.updateCustomer();
+                    break;
+                case 4:
+
+                    UI.deleteCustomer();
+                    break;
+                case 5:
+                    // Exit the loop
+                    System.out.println("Exiting...");
+                    exit = false;
+                    break;
+                default:
+                    // Handle invalid input
+                    System.out.println("Invalid choice! Please enter 1, 2, or 3.");
+                    break;
+            }
         }
-        //  DbUtil.getDbConnection(); //connected java to db
 
-        //CustomerDaoImpl cust_dao = new CustomerDaoImpl();
-
-//        cust_dao.createCustomer("John Doe", "9876543210", "john.doe@example.com", "Bangalore");
-//        CustomerServiceImpl cust_service = new CustomerServiceImpl();
-
-//        AddCustomerReq addCustomerReq = new AddCustomerReq();
-
-//        addCustomerReq.setName("");
-//        addCustomerReq.setPhone("");
-//        addCustomerReq.setEmail("");
-//        addCustomerReq.setAddress("");
-//
-//       String message = cust_dao.createCustomerV2("Kouu","8861773225","kousthubha.gk@cars24.com", "Bangalore");
-//        String message = cust_service.registerCustomer(addCustomerReq);
-//        System.out.println(message);
-//        cannot do both at once - comment one out
-
-//        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
-//        CustomerProfileReq customerProfileReq = new CustomerProfileReq();
-//        customerProfileReq.setEmail("kousthubha.gk@cars24.com");
-//        customerProfileReq.setPhone("8861773225");
-//
-//        cust_dao.getCustomer(customerProfileReq);
-//
-//        CustomerDaoImpl customerDaoImpl=new CustomerDaoImpl();
-//
-//        CustomerProfileReq req=new CustomerProfileReq();
-//        req.setEmail("hhyy@g");
-//        req.setPhone("0997655555");
-//
-//        CustomerProfileRes response=customerDaoImpl.getCustomer(req);
-//        System.out.println(response);
-
-        //CustomerService.getCustomerProfile(req);
-
-
-        //CustomerDaoImpl customerDao = new CustomerDaoImpl();
-
-        // Create and populate a CustomerProfileReq object
-                      // Example phone to search for
-
-        // Call the getCustomer method
-
-        //CustomerProfileReq prof1=new CustomerProfileReq();
-        //prof1.setEmail("rick@mail");
-        //prof1.setPhone("1234567891");
-
-        //Getting customer records
-//        CustomerProfileReq req = new CustomerProfileReq();
-//        req.setEmail("rita08@example.com"); // Example email to search for
-//        req.setPhone("0000543210");// Example phone to search for
-//
-//        CustomerDaoImpl cust=new CustomerDaoImpl();
-//        cust.getCustomer(req);
-//        CustomerProfileRes response = cust.getCustomer(req);
-
-
-
-
-
-        //Creating customer records
-      //AddCustomerReq cust_req=new AddCustomerReq();
-//        cust_req.setName("rickvi");
-//        cust_req.setPhone("123432145");
-//        cust_req.setAddress("bng");
-//        cust_req.setEmail("r3@mail");
-//        cust.createCustomer(cust_req);
-
-        //creating with invoking service class
-//        CustomerServiceImpl cust1=new CustomerServiceImpl();
-//        cust_req.setName("Dhatri");
-//        cust_req.setPhone("1234342534");
-//        cust_req.setEmail("trau@gmail.com");
-//        cust_req.setAddress("Bng");
-//        cust1.registerCustomer(cust_req);
-
-        //Delete on service class
-//        CustomerServiceImpl cust1=new CustomerServiceImpl();
-//        AddCustomerReq cust_req=new AddCustomerReq();
-//        cust_req.setPhone("123432145");
-//        cust_req.setEmail("r3@mail");
-//        cust1.deleteCustomer(cust_req);
-
-
-
-
-
-
-
-
-
-
-
-
-
+        sc.close();  // Close the Scanner
     }
-
-
 }
